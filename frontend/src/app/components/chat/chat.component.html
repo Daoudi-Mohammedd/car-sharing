@@ -9,6 +9,7 @@
         <p>Schreibe die erste Nachricht in diesem Chat!</p>
       } @else {
         <div #scrollContainer class="chat-container">
+
           @for (chatMessage of chatMessages; track chatMessage.chatMessageId; let idx = $index) {
             @if (isOwnMessage(chatMessage)) {
               <mat-card class="message right" appearance="outlined">

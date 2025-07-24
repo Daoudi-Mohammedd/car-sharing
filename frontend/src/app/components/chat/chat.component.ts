@@ -130,6 +130,9 @@ export class ChatComponent implements OnInit, OnDestroy {
 
   setEditMessageId(chatMessageId: number): void {
     this.editMessageId = chatMessageId
+    // this.chatForm.setValue({ message: "Hallo" });
+    // ? wenn nicht undefind ist dann kriegen wird content also das ist optional chaining
+    // Nullish Coalescing – falls das Ergebnis undefined ist, dann " " als Fallback.
     this.chatForm.setValue({message: this.chatMessages.find(m => m.chatMessageId === Number(chatMessageId))?.content ?? ""})
   }
 
@@ -160,6 +163,7 @@ export class ChatComponent implements OnInit, OnDestroy {
   }
 
   upsertMessage = (messages: OutboundChatMessage[], message: OutboundChatMessage): OutboundChatMessage[] => {
+   //findIndex() gibt immer nur den ersten Treffer zurück. Also auch wenn es mehrere Nachrichten mit derselben ID gäbe (was eigentlich nicht passieren sollte bei IDs), bekommst du nur den ersten passenden Index.
     const index = messages.findIndex(m => m.chatMessageId === message.chatMessageId)
     if (index === -1) {
       // mark new messages as seen, if we are receiving we are in the chat active
